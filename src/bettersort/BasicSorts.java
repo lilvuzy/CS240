@@ -37,7 +37,7 @@ public class BasicSorts {
    */
   public static <T extends Comparable<T>> void insertionSubsort(T[] items, int start, int end) {
     // TODO
-    for (int i = start + 1; i < end; i++) {
+    for (int i = start + 1; i < end + 1; i++) {
       T itemToShift = items[i];
 
       // Displace any smaller items one cell to the right.
