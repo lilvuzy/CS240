@@ -36,7 +36,6 @@ public class BasicSorts {
    * @param end The inclusive ending index of the window.
    */
   public static <T extends Comparable<T>> void insertionSubsort(T[] items, int start, int end) {
-    // TODO
     for (int i = start + 1; i < end + 1; i++) {
       T itemToShift = items[i];
 
@@ -49,12 +48,6 @@ public class BasicSorts {
 
       items[j] = itemToShift;
     }
-
-
-
-
-
-
   }
 
   /**
