@@ -4,7 +4,6 @@ import java.util.Random;
 
 import static bettersort.BasicSorts.insertionSubsort;
 
-
 public class MergeSortImproved {
 
   private static final int MERGE_SORT_THRESHOLD = 5;
