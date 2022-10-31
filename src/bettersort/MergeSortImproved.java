@@ -12,7 +12,7 @@ public class MergeSortImproved {
    * Merge sort the provided array using an improved merge operation.
    */
   public static <T extends Comparable<T>> void mergeSortHalfSpace(T[] items) {
-    T[] tmps = (T[]) new Comparable[items.length / 2];
+    T[] tmps = (T[]) new Comparable[items.length  / 2];
     mergeSortHalfSpace(items, tmps, 0, items.length - 1);
   }
 
@@ -27,6 +27,7 @@ public class MergeSortImproved {
   private static <T extends Comparable<T>> void mergeSortHalfSpace(T[] items, T[] tmps, int left, int right) {
     if (left < right) {
       int mid = (left + right) / 2;
+
       mergeSortHalfSpace(items, tmps, left, mid);
       mergeSortHalfSpace(items, tmps, mid + 1, right);
       merge(items, tmps, left, mid, right);
@@ -37,15 +38,14 @@ public class MergeSortImproved {
    * Merge two sorted sub-arrays using half the space of a traditional merge function.
    */
   private static <T extends Comparable<T>> void merge(T[] items, T[] tmps, int left, int mid, int right) {
-    for (int i = 0, j = left; j <= mid; j++, i++) {
-      tmps[i] = items[j];
+
+    for (int tempIndex = 0, itemIndex = left; itemIndex <= mid; itemIndex++, tempIndex++) {
+      tmps[tempIndex] = items[itemIndex];
     }
 
-    int leftIndex = 0;
-    int rightIndex = mid + 1;
     int mergeIndex = left;
-
-    // Compare left and right until reaching end of one subarray
+    int rightIndex = mid + 1;
+    int leftIndex = 0;
     while (rightIndex <= right && leftIndex <= mid - left) {
       if (tmps[leftIndex].compareTo(items[rightIndex]) <= 0) {
         items[mergeIndex] = tmps[leftIndex];
@@ -57,16 +57,16 @@ public class MergeSortImproved {
       mergeIndex++;
     }
 
-    // Add remaining right subarray
     while (rightIndex <= right) {
       items[mergeIndex] = items[rightIndex];
       rightIndex++;
+      mergeIndex++;
     }
 
-    // Add remaining left subarray
     while (leftIndex <= mid - left) {
       items[mergeIndex] = tmps[leftIndex];
       leftIndex++;
+      mergeIndex++;
     }
   }
 
