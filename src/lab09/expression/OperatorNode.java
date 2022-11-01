@@ -30,22 +30,34 @@ public class OperatorNode extends ExpressionNode {
   @Override
   public String toPostfix() {
     // TODO: See the description in the superclass.
-    if (left == null && right == null) {
-      return operator.symbol();
+    if (operator == null) {
+      return "";
     }
-    return left.toPostfix() + right.toPostfix();
+    return left.toPostfix() + " " +   right.toPostfix() +  " " +  operator.symbol();
 
   }
 
   @Override
   public String toPrefix() {
     // TODO: See the description in the superclass.
-    return null;
+    if (operator == null) {
+      return "";
+    }
+    return  operator.symbol() +  " " +  left.toPrefix() +  " " +  right.toPrefix();
   }
+
 
   @Override
   public String toInfix() {
     // TODO: See the description in the superclass.
-    return null;
+    if (operator == null) {
+      return "";
+    }
+    if (operator.precedence() == right.precedence()) {
+      return left.toInfix() + " " +  operator.symbol() + " (" + right.toInfix() + ")";
+    } else if (operator.precedence() < right.precedence()) {
+      return "(" + left.toInfix() + " " +  operator.symbol() + " " + right.toInfix() + ")";
+    }
+    return left.toInfix() + " " +  operator.symbol() + " " + right.toInfix();
   }
 }
