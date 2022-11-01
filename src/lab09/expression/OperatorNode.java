@@ -55,7 +55,7 @@ public class OperatorNode extends ExpressionNode {
     }
     if (operator.precedence() == right.precedence()) {
       return left.toInfix() + " " +  operator.symbol() + " (" + right.toInfix() + ")";
-    } else if (operator.precedence() < right.precedence()) {
+    } else if (operator.precedence() < right.precedence() && right.precedence() != 2) {
       return "(" + left.toInfix() + " " +  operator.symbol() + " " + right.toInfix() + ")";
     }
     return left.toInfix() + " " +  operator.symbol() + " " + right.toInfix();
