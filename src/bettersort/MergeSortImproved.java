@@ -11,7 +11,7 @@ public class MergeSortImproved {
    * Merge sort the provided array using an improved merge operation.
    */
   public static <T extends Comparable<T>> void mergeSortHalfSpace(T[] items) {
-    T[] tmps = (T[]) new Comparable[items.length  / 2];
+    T[] tmps = (T[]) new Comparable[(items.length  / 2) + 1];
     mergeSortHalfSpace(items, tmps, 0, items.length - 1);
   }
 
@@ -74,7 +74,7 @@ public class MergeSortImproved {
    * switching to insertion sort for small sub-arrays.
    */
   public static <T extends Comparable<T>> void mergeSortAdaptive(T[] items) {
-    T[] tmps = (T[]) new Comparable[items.length / 2];
+    T[] tmps = (T[]) new Comparable[(items.length / 2) + 1];
     mergeSortAdaptive(items, tmps, 0, items.length - 1);
   }
 
@@ -102,7 +102,7 @@ public class MergeSortImproved {
    * fallback method used by introspective sort.
    */
   public static <T extends Comparable<T>> void mergeSubsortAdaptive(T[] items, int start, int end) {
-    T[] tmps = (T[]) new Comparable[items.length / 2];
+    T[] tmps = (T[]) new Comparable[(items.length / 2) + 1];
     mergeSortAdaptive(items, tmps, start, end);
   }
 }
