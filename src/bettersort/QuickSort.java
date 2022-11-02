@@ -15,9 +15,9 @@ public class QuickSort {
 
   /**
    * Recursive helper method for quicksort.
-   * 
+   *
    * @param items The items to sort
-   * @param left The starting index of the region to sort
+   * @param left  The starting index of the region to sort
    * @param right The ending index of the region to sort.
    */
   private static <T extends Comparable<T>> void quickSort(T[] items, int left, int right) {
@@ -32,7 +32,7 @@ public class QuickSort {
    * Partition the indicated region of the array. The pivot item will be placed in
    * its final sorted position, with all smaller elements moved to the left and
    * all larger elements moved to the right.
-   * 
+   *
    * @return The final index of the pivot item.
    */
   protected static <T extends Comparable<T>> int partition(T[] items, int left, int right) {

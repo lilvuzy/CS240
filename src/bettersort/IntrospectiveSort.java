@@ -1,10 +1,18 @@
 package bettersort;
 
-import java.util.Random;
-
 import static bettersort.MergeSortImproved.mergeSubsortAdaptive;
 
+/**
+ * Introspective sort class. Combines quicksort and mergesubsortadaptive.
+ */
 public class IntrospectiveSort {
+
+  /**
+   * Introspective sort parent method.
+   *
+   * @param items original array.
+   * @param <T>   generic parameter.
+   */
   public static <T extends Comparable<T>> void introspectiveSort(T[] items) {
     if (items.length > 0) {
       introspectiveSort(items, 0, items.length - 1, 0);
@@ -15,10 +23,13 @@ public class IntrospectiveSort {
    * Recursive helper method for quicksort.
    *
    * @param items The items to sort
-   * @param left The starting index of the region to sort
+   * @param left  The starting index of the region to sort
    * @param right The ending index of the region to sort.
+   * @param level recursion level.
+   * @param <T>   generic parameter.
    */
-  private static <T extends Comparable<T>> void introspectiveSort(T[] items, int left, int right, int level) {
+  private static <T extends Comparable<T>> void introspectiveSort(
+          T[] items, int left, int right, int level) {
     if (left < right) {
       if (level > 2 * Math.floor(Math.log(items.length) / Math.log(2))) {
         mergeSubsortAdaptive(items, left, right);
@@ -35,6 +46,10 @@ public class IntrospectiveSort {
    * its final sorted position, with all smaller elements moved to the left and
    * all larger elements moved to the right.
    *
+   * @param left  left index.
+   * @param right right index.
+   * @param items original array.
+   * @param <T>   generic parameter.
    * @return The final index of the pivot item.
    */
   protected static <T extends Comparable<T>> int partition(T[] items, int left, int right) {

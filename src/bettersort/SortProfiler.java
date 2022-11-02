@@ -1,5 +1,10 @@
 package bettersort;
 
+import joptsimple.OptionException;
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
+import joptsimple.OptionSpec;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -8,11 +13,6 @@ import java.lang.management.ThreadMXBean;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
-
-import joptsimple.OptionException;
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-import joptsimple.OptionSpec;
 
 /**
  * Application for testing the run-time behavior of several sorting algorithms.
@@ -24,13 +24,13 @@ import joptsimple.OptionSpec;
 public class SortProfiler {
   private static final String[] ALL_SORT_NAMES = {"insertion", "selection", "merge", "merge1", "merge2", "quick", "introspective", "timsort"};
 
-  private Generator gen;
-  private ArrayList<Sorter<Integer>> sorts;
-  private ArrayList<String> sortNames;
-  private int start;
-  private int interval;
-  private int max;
-  private int trials;
+  private final Generator gen;
+  private final ArrayList<Sorter<Integer>> sorts;
+  private final ArrayList<String> sortNames;
+  private final int start;
+  private final int interval;
+  private final int max;
+  private final int trials;
 
   /**
    * Create a sort profiler object.
@@ -119,26 +119,26 @@ public class SortProfiler {
     OptionParser parser = new OptionParser();
 
     OptionSpec<Integer> startSpec = parser.accepts("s", "Starting (smallest) input size")
-      .withRequiredArg().ofType(Integer.class).describedAs("NUMBER").required();
+            .withRequiredArg().ofType(Integer.class).describedAs("NUMBER").required();
 
     OptionSpec<Integer> intervalSpec = parser.accepts("i", "Input size increment").withRequiredArg()
-      .ofType(Integer.class).describedAs("NUMBER").required();
+            .ofType(Integer.class).describedAs("NUMBER").required();
 
     OptionSpec<Integer> maxSpec = parser.accepts("m", "Maximum input size to test")
-      .withRequiredArg().ofType(Integer.class).describedAs("NUMBER").required();
+            .withRequiredArg().ofType(Integer.class).describedAs("NUMBER").required();
 
     OptionSpec<Integer> trialsSpec = parser.accepts("t", "Number of trials for each input size")
-      .withRequiredArg().ofType(Integer.class).describedAs("NUMBER").required();
+            .withRequiredArg().ofType(Integer.class).describedAs("NUMBER").required();
 
     OptionSpec<String> sortSpec = parser.accepts("w",
-        "Comma separated list of sorts. Options include insertion, selection, merge, merge1, merge2, quick, introspective and timsort. Default is to execute all sorts.")
-      .withOptionalArg().describedAs("SORT1,SORT2,...").ofType(String.class)
-      .withValuesSeparatedBy(",");
+                    "Comma separated list of sorts. Options include insertion, selection, merge, merge1, merge2, quick, introspective and timsort. Default is to execute all sorts.")
+            .withOptionalArg().describedAs("SORT1,SORT2,...").ofType(String.class)
+            .withValuesSeparatedBy(",");
 
     OptionSpec<String> genSpec = parser
-      .accepts("g",
-        "Sequence generator. Options include random, ordered or evil. The default is random")
-      .withOptionalArg().ofType(String.class).describedAs("GENERATOR");
+            .accepts("g",
+                    "Sequence generator. Options include random, ordered or evil. The default is random")
+            .withOptionalArg().ofType(String.class).describedAs("GENERATOR");
 
     try {
       // Values we need to extract from the command line...
@@ -162,14 +162,10 @@ public class SortProfiler {
       String genString = options.has(genSpec) ? options.valueOf(genSpec) : "random";
 
       Generator gen = switch (genString) {
-        case "random" ->
-          Generators::generateRandom;
-        case "ordered" ->
-          Generators::generateOrdered;
-        case "evil" ->
-          Generators::generateEvil;
-        default ->
-          throw new IllegalArgumentException("Unrecognized generator.");
+        case "random" -> Generators::generateRandom;
+        case "ordered" -> Generators::generateOrdered;
+        case "evil" -> Generators::generateEvil;
+        default -> throw new IllegalArgumentException("Unrecognized generator.");
       };
 
       // Create and run the SortProfiler

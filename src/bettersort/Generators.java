@@ -4,10 +4,9 @@ import java.util.Random;
 
 /**
  * Sequence generators for testing sort algorithms.
- * 
+ *
  * @author Nathan Sprague
  * @version 2/2019
- *
  */
 public class Generators {
   private static Random gen;

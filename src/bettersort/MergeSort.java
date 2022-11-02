@@ -17,10 +17,10 @@ public class MergeSort {
 
   /**
    * Recursive helper method for the merge sort algorithm.
-   * 
+   *
    * @param items The array to sort
-   * @param tmps Temporary array for merge operation
-   * @param left Index of the left end of the region to sort
+   * @param tmps  Temporary array for merge operation
+   * @param left  Index of the left end of the region to sort
    * @param right Index of the right end of the region to sort.
    */
   private static <T extends Comparable<T>> void mergeSort(T[] items, T[] tmps, int left, int right) {
@@ -38,9 +38,7 @@ public class MergeSort {
   private static <T extends Comparable<T>> void merge(T[] items, T[] tmps, int left, int mid, int right) {
     // Copy items to temporary array since we're about to
     // chaotically reorganize the original.
-    for (int i = left; i <= right; ++i) {
-      tmps[i] = items[i];
-    }
+    if (right + 1 - left >= 0) System.arraycopy(items, left, tmps, left, right + 1 - left);
 
     int i = left;
     int leftIndex = left;
