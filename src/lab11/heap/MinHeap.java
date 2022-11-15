@@ -48,9 +48,12 @@ public class MinHeap<T extends Comparable> {
       throw new IllegalStateException("Heap is full, cannot add any more elements.");
     }
 
-    // Append item to heap
+    // Append to next available spot in heap.
+      items[size] = item;
 
     // Percolate item to proper position.
+    minHeapPercolateUp(size);
+    size++;
   }
 
   /**
@@ -58,14 +61,39 @@ public class MinHeap<T extends Comparable> {
    *
    * @return item removed.
    */
-  public T remove() {
+  public Comparable remove() {
+
     if (isEmpty()) {
       throw new NoSuchElementException("Cannot remove, there are no elements in the heap.");
     }
-    // remove minimum value
+    Comparable minElement = items[0];
+
+    // Move last heap item to head.
+    items[0] = items[size];
+
+    // Percolate new head down to proper position.
+    minHeapPercolateDown(0);
+
     // return value
-    //
-    return null;
+    return minElement;
+  }
+
+  /**
+   * Percolate up newly added value to proper position in min heap.
+   *
+   * @param index starting index.
+   */
+  private void minHeapPercolateUp(int index) {
+
+  }
+
+  /**
+   * Percolate down newly added value to proper position in min heap.
+   *
+   * @param index starting index.
+   */
+  private void minHeapPercolateDown(int index) {
+
   }
 
   /**
