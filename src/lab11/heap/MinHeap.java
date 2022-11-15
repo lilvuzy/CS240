@@ -67,4 +67,13 @@ public class MinHeap<T extends Comparable> {
     //
     return null;
   }
+
+  /**
+   * Main method for MinHeap testing.
+   *
+   * @param args command line arguments.
+   */
+  public static void main(String[] args) {
+
+  }
 }
