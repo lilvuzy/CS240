@@ -7,7 +7,7 @@ import static bettersort.BasicSorts.insertionSubsort;
  */
 public class MergeSortImproved {
 
-  private static final int MERGE_SORT_THRESHOLD = 5;
+  private static final int MERGE_SORT_THRESHOLD = 40;
 
   /**
    * Merge sort the provided array using an improved merge operation.
