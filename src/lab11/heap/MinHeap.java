@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 
 /**
  * MinHeap class for heap lab.
+ * Project includes starting code pulled from ZyBook CS240 Chapter 14.
  *
  * @param <T> generic parameter extending comparable.
  */
@@ -69,10 +70,13 @@ public class MinHeap<T extends Comparable> {
     Comparable minElement = items[0];
 
     // Move last heap item to head.
-    items[0] = items[size];
+    items[0] = items[size - 1];
 
     // Percolate new head down to proper position.
     minHeapPercolateDown(0);
+
+    // Decrement heap size.
+    size--;
 
     // return value
     return minElement;
@@ -84,7 +88,18 @@ public class MinHeap<T extends Comparable> {
    * @param index starting index.
    */
   private void minHeapPercolateUp(int index) {
-
+    while (index > 0) {
+      int parentIndex = (index - 1) / 2;
+      if (items[index].compareTo(items[parentIndex]) > 0) {
+        return;
+      }
+      else {
+        Comparable tempItem = items[parentIndex];
+        items[parentIndex] = items[index];
+        items[index] = tempItem;
+        index = parentIndex;
+      }
+    }
   }
 
   /**
@@ -93,7 +108,38 @@ public class MinHeap<T extends Comparable> {
    * @param index starting index.
    */
   private void minHeapPercolateDown(int index) {
+    // TO-DO
+    int childIndex = 2 * index + 1;
+    Comparable value = items[index];
 
+    while (childIndex < size) {
+      // Find the max among the node and all the node's children
+      Comparable minValue = value;
+      int minIndex = -1;
+      for (int i = 0; i < 2 && i + childIndex < size; i++) {
+        if (items[i + childIndex].compareTo(minValue) < 0) {
+          minValue = items[i + childIndex];
+          minIndex = i + childIndex;
+        }
+      }
+
+      // If process is complete and the item has been percolated down.
+      if (minValue == value) {
+        return;
+      }
+      else {
+        // Store minIndex value.
+        Comparable tempItem = items[minIndex];
+
+        // Move the current item down.
+        items[minIndex] = items[index];
+
+        // Move the compared item up.
+        items[index] = tempItem;
+        index = minIndex;
+        childIndex = 2 * index + 1;
+      }
+    }
   }
 
   /**
@@ -102,6 +148,13 @@ public class MinHeap<T extends Comparable> {
    * @param args command line arguments.
    */
   public static void main(String[] args) {
+    MinHeap newHeap = new MinHeap(10);
 
+    for (int i = 0; i < 10; i++) {
+      newHeap.add(i);
+    }
+    System.out.println(newHeap.remove());
+    System.out.println(newHeap.remove());
+    System.out.println(newHeap.remove());
   }
 }
