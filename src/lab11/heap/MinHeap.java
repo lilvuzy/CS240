@@ -1,16 +1,15 @@
 package lab11.heap;
 
+import java.util.NoSuchElementException;
+
 /**
  * MinHeap class for heap lab.
  *
  * @param <T> generic parameter extending comparable.
  */
 public class MinHeap<T extends Comparable> {
-  public T type;
   public final Comparable[] items;
   private int size;
-  private final int capacity;
-
   /**
    * Constructor for MinHeap.
    *
@@ -18,7 +17,6 @@ public class MinHeap<T extends Comparable> {
    */
   public MinHeap(int capacity) {
     items = new Comparable[capacity];
-    this.capacity = capacity;
     size = 0;
   }
 
@@ -40,13 +38,33 @@ public class MinHeap<T extends Comparable> {
     return size == 0;
   }
 
+  /**
+   * Add item if there is space available.
+   *
+   * @param item item to add.
+   */
   public void add(T item) {
-    if (size == capacity) {
-      throw new IllegalStateException("Heap is full, cannot add any more items.");
+    if (size == items.length) {
+      throw new IllegalStateException("Heap is full, cannot add any more elements.");
     }
 
     // Append item to heap
 
     // Percolate item to proper position.
+  }
+
+  /**
+   * Remove the minimum item in the heap.
+   *
+   * @return item removed.
+   */
+  public T remove() {
+    if (isEmpty()) {
+      throw new NoSuchElementException("Cannot remove, there are no elements in the heap.");
+    }
+    // remove minimum value
+    // return value
+    //
+    return null;
   }
 }
