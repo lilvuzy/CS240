@@ -38,10 +38,11 @@ public class MadZip {
    */
   public static void main(String[] args) {
 
-    String fileInput = args[0];
-    String fileOutput = args[1];
+
 
     try {
+      String fileInput = args[0];
+      String fileOutput = args[1];
 
       // Create a file input stream to read the file byte by byte
       FileInputStream fileInputStream = new FileInputStream(fileInput);
@@ -62,8 +63,7 @@ public class MadZip {
       for (byte b : buffer) {
         if (byteFrequency.containsKey(b)) {
           byteFrequency.put(b, byteFrequency.get(b) + 1);
-        }
-        else {
+        } else {
           byteFrequency.put(b, 1);
         }
         System.out.println("Byte: " + b + " Frequency: " + byteFrequency.get(b));
@@ -100,14 +100,12 @@ public class MadZip {
       } catch (Exception e) {
         e.printStackTrace();
       }
-
     } catch (IOException e) {
       e.printStackTrace();
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("Please enter a file to unzip and an output file.");
+      e.printStackTrace();
     }
-
-
-
-
 
 
   }
