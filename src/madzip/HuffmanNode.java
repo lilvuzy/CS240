@@ -114,7 +114,7 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
 
     // If frequencies are equal, compare bytes, if not compare frequencies
     if (this.frequency == o.frequency) {
-      return this.data - o.data;
+      return o.data - this.data;
     }
     return this.frequency - o.frequency;
   }
