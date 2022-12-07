@@ -111,7 +111,12 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
 
   @Override
   public int compareTo(HuffmanNode o) {
-    return frequency - (o).frequency;
+
+    // If frequencies are equal, compare bytes, if not compare frequencies
+    if (this.frequency == o.frequency) {
+      return this.data - o.data;
+    }
+    return this.frequency - o.frequency;
   }
 
 }
