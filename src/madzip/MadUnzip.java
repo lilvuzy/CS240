@@ -9,6 +9,20 @@ import java.util.HashMap;
 public class MadUnzip {
 
   /**
+   * Create empty file with given output name.
+   *
+   * @param fileOut name for output file
+   */
+  public static void writeEmptyFile(String fileOut) {
+    try {
+      FileOutputStream fileOutputStream = new FileOutputStream(fileOut);
+      fileOutputStream.close();
+    } catch (IOException e) {
+      System.out.println("Error writing to file.");
+    }
+  }
+
+  /**
    * Main method.
    *
    * @param args string arguments
@@ -27,6 +41,12 @@ public class MadUnzip {
       objectInputStream.close();
       fileInputStream.close();
       HuffmanSave huffmanSave = (HuffmanSave) objectFromSave;
+
+      // If bitsequence is empty, write empty file and exit
+      if (huffmanSave.getEncoding().length() == 0) {
+        writeEmptyFile(fileOutput);
+        return;
+      }
 
       // Build minHeap to store bytes and their frequencies
       MinHeap minHeap = HuffmanHelpers.buildMinHeap(huffmanSave.getFrequencies());
