@@ -16,11 +16,7 @@ public class PathAlgorithms {
    * @return the shortest path from the starting vertex to the ending vertex, or null if no path exists
    */
   public static List<Integer> shortestPath(Graph graph, int from, int to) {
-    Queue[] queue = new Queue[graph.getVertexCount()];
-
     return null;
-
-
   }
 
   /**
